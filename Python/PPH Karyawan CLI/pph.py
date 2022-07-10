@@ -58,7 +58,7 @@ elif(gajitahunan > claster4):  # >5miliar
     pajak2 = pajak - 4500000000
     pph = (pajak * 35/100)+1350000000+62500000+28500000+3000000
 else:
-    print("maaf format yang anda masukkan tidak sesuai")
+    print("maaf format yang anda masukkan tidak sesuai\n")
 
 print("\n============================================\n")
 print("gaji anda                            = Rp "+str(gajibulanan)+"")
