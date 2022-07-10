@@ -35,7 +35,7 @@ else:
 
 gajibulanan = int(gajipokok)-int(iuranasuransi)-int(iuranpensiun)
 #biayajabatan = int(gajipokok)*5/100
-gajitahunan = int(gajipokok)*12
+gajitahunan = int(gajibulanan)*12
 ptkp = tidakkenapajak+tunjangan
 pajak = int(gajitahunan)-ptkp
 
