@@ -1,3 +1,7 @@
+from ast import If
+from cgi import print_arguments
+
+
 ketetapantanggungan = 4500000
 tidakkenapajak = 54000000
 claster0 = 54000000
@@ -5,8 +9,10 @@ claster1 = claster0 + 60000000
 claster2 = claster1 + 250000000
 claster3 = claster2 + 500000000
 claster4 = claster3 + 5000000000
+
 pph = 0
 tunjangan = 0
+
 
 print("\n\n\n============================================\n")
 print("PENGHITUNG PPH KARYAWAN PT MAKMUR JAYA ABADI\n")
@@ -67,3 +73,4 @@ print("penghasilan tidak kena pajak anda    = Rp "+str(ptkp)+"")
 print("penghasilan kena pajak               = Rp "+str(pajak)+"")
 print("pph anda                             = Rp "+str(pph)+"")
 print("\n============================================\n")
+
