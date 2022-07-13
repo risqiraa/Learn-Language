@@ -525,74 +525,58 @@ print(dir(number1))
 
 # ────────────────────────────────────────────────────────────────────────────────
 
-# TODO ─── Penggunaan Fungsi Enumerate ────────────────────────────────────────────────
-# Metode enumerate()ini menambahkan penghitung ke iterable dan mengembalikannya(objek enumerate).
-# Syntax : enumerate(iterable, start=0)
-# enumerate()metode membutuhkan dua parameter:
-# iterable - urutan, iterator, atau objek yang mendukung iterasi
-# start(optional) - enumerate() mulai menghitung dari nomor ini. Jika start dihilangkan, is diambil sebagai awal..
-# enumerate()metode menambahkan penghitung ke iterable dan mengembalikannya.
-# Objek yang dikembalikan adalah objek enumerate.
+# TODO ─── Penggunaan Fungsi Divmod ───────────────────────────────────────────────────
+# Metode divmod()ini mengambil dua angka sebagai argumen dan mengembalikan hasil bagi dan sisanya dalam sebuah tupel.
+# Syntax : divmod(number1, number2)
+# Metode divmod()ini mengambil dua parameter:
+#   -number1 - pembilang, bisa berupa bilangan bulat atau bilangan floating point
+#   -number2 - penyebut, bisa berupa bilangan bulat atau bilangan floating point
+# Metode divmod()mengembalikan:
+#   -(quotient, remainder)- Tuple yang berisi hasil bagi dan sisa pembagian
+#   -TypeError - untuk argumen non-numerik
 # #
 
 # ─── Contoh 0 ───────────────────────────────────────────────────────────────────
+# returns the quotient and remainder of 8/3
+result = divmod(8, 3)
 
-languages = ['Python', 'Java', 'JavaScript']
+print('Quotient and Remainder = ', result)
 
-enumerate_prime = enumerate(languages)
-
-# convert enumerate object to list
-print(list(enumerate_prime))
-
-# Output: [(0, 'Python'), (1, 'Java'), (2, 'JavaScript')]
+# Output: Quotient and Remainder =  (2, 2)
 
 # ────────────────────────────────────────────────────────────────────────────────
 
-# ─── Contoh 1 : Bagaimana Enumerate Bekerja ─────────────────────────────────────
+# ─── Contoh 1 : Python divmod() dengan Argumen Integer ──────────────────────────
+# divmod() with integer arguments
+print('divmod(8, 3) = ', divmod(8, 3))
+# Output : divmod(8, 3) =  (2, 2)
 
-grocery = ['bread', 'milk', 'butter']
-enumerateGrocery = enumerate(grocery)
+# divmod() with integer arguments
+print('divmod(3, 8) = ', divmod(3, 8))
+# Output : divmod(3, 8) =  (0, 3)
 
-print(type(enumerateGrocery))
-# Output : <class 'enumerate'>
-
-# converting to list
-print(list(enumerateGrocery))
-#Output : [(0, 'bread'), (1, 'milk'), (2, 'butter')]
-
-# ketika menghitung mulai dari angka yang ditentukan
-enumerateGrocery = enumerate(grocery, 10)
-print(list(enumerateGrocery))
-# Output : [(10, 'bread'), (11, 'milk'), (12, 'butter')]
+# divmod() with integer arguments
+print('divmod(5, 5) = ', divmod(5, 5))
+# Output : divmod(5, 5) =  (1, 0)
 
 # ────────────────────────────────────────────────────────────────────────────────
 
-# ─── Contoh 2: Perulangan Obyek Enumerate ────────────────────────────────
-grocery = ['bread', 'milk', 'butter']
+# ─── Contoh 2: Python divmod() dengan Float Arguments ───────────────────────────
+# divmod() with float arguments
+print('divmod(8.0, 3) = ', divmod(8.0, 3))
+# Output : divmod(8.0, 3) =  (2.0, 2.0)
 
-for item in enumerate(grocery):
-    print(item)
-    # Output :
-    # (0, 'bread')
-    # (1, 'milk')
-    # (2, 'butter')
-print('\n')
+# divmod() with float arguments
+print('divmod(3, 8.0) = ', divmod(3, 8.0))
+# Output : divmod(3, 8.0) =  (0.0, 3.0)
 
+# divmod() with float arguments
+print('divmod(7.5, 2.5) = ', divmod(7.5, 2.5))
+# Output : divmod(7.5, 2.5) =  (3.0, 0.0)
 
-for count, item in enumerate(grocery):
-    print(count, item)
-    # 0 bread
-    # 1 milk
-    # 2 butter
-print('\n')
-
-
-# changing default start value
-for count, item in enumerate(grocery, 100):
-    print(count, item)
-# 0 bread
-# 1 milk
-# 2 butter
+# divmod() with float arguments
+print('divmod(2.6, 0.5) = ', divmod(2.6, 0.5))
+# Output : divmod(2.6, 0.5) =  (5.0, 0.10000000000000009)
 
 
 # ────────────────────────────────────────────────────────────────────────────────
