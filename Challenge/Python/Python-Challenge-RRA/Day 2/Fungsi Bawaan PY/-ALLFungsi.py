@@ -216,3 +216,118 @@ print(chr(97))  # a
 print(chr(100))  # d
 
 # ────────────────────────────────────────────────────────────────────────────────
+
+
+# TODO ─── Penggunaan Fungsi Compile ──────────────────────────────────────────────────
+# Fungsi compile() mengembalikan kode objek python dari source code.
+# Fungsi ini digunakan jika kita ingin mengubah kode dalam bentuk deretan string menjadi kode python (yang bisa dieksekusi python).
+# Objek kode yang dikembalikan tersebut nantinya bisa dieksekusi oleh fungsi-fungsi exec() dan eval().
+
+# Syntax :  - compile(source, filename, mode)
+#           - compile(source, filename, mode, flags=0, dont_inherit=False, optimize=-1)
+
+# Fungsi compile() memiliki beberapa parameter yaitu:
+# source – string, byte string, atau objek AST
+# filename – file yang akan dibaca kodenya. Kita bisa memberi nama sesuai keinginan kita
+# mode – Bisa exec, eval, atau single.
+# - eval – hanya menerima ekspresi tunggal
+# - exec – bisa menerima beberapa baris kode pernyataan, kelas, fungsi dan lain sebagainya
+# - single – berisi satu pernyataan
+
+# flags dan dont_inherit – mengontrol pernyataan yang nantinya mempengaruhi kompilasi dari source.
+# optimize – level optimasi dari kompiler
+
+string_kode = 'a = 7\nb = 8\njumlah=a+b\nprint("jumlah =",jumlah)'
+kode_objek = compile(string_kode, 'kodestring', 'exec')
+
+exec(kode_objek)  # jumlah = 15
+
+# ────────────────────────────────────────────────────────────────────────────────
+# TODO ─── Penggunaan Fungsi Classmethod ──────────────────────────────────────────────
+# Fungsi classmethod() mengembalikan fungsi kelas dari suatu fungsi.
+# Syntax : classmethod(function)
+# Function – Fungsi yang akan diubah menjadi fungsi kelas
+# Fungsi classmethod() mengembalikan fungsi kelas untuk fungsi yang dijadikan argumennya
+# def classMethod(cls, args...)
+# #
+
+# from datetime import date //Hilangkan
+
+
+class Orang:
+    usia = 25
+
+    def print_usia(cls):
+        print('Usianya:', cls.usia)
+
+
+# menciptakan fungsi kelas print_usia
+Orang.print_usia = classmethod(Orang.print_usia)
+
+Orang.print_usia()  # Usianya: 25
+print("--------------------------------------------------------------------")
+
+# random Person
+
+
+class Orang:  # ini class
+    def __init__(self, nama, umur, tinggi):  # digunakan untuk menampung String pada input bawah
+        self.nama = nama  # menampung data name
+        self.umur = umur  # menampung data age
+        self.tinggi = tinggi  # menampung data tinggi
+
+    @classmethod
+    def tahunlahir(cls, nama, tahunlahirmu, tinggimu):  # rumus classmethod
+        tinggiminimum = 150
+        return cls(nama, date.today().year - tahunlahirmu, tinggimu-tinggiminimum)
+
+    def display(self):
+        print(self.nama + "'s age is: " +
+              str(self.umur)+" tinggi is: "+str(self.tinggi))
+
+
+person = Orang('Adam', 19, 20)  # bisa menggunakan class
+person.display()
+
+person1 = Orang.tahunlahir('John',  1985, 170)  # bisa menggunakan class method
+person1.display()
+
+
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# random Person
+
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    @staticmethod
+    def fromFathersAge(name, fatherAge, fatherPersonAgeDiff):
+        return Person(name, date.today().year - fatherAge + fatherPersonAgeDiff)
+
+    @classmethod
+    def fromBirthYear(cls, name, birthYear):
+        return cls(name, date.today().year - birthYear)
+
+    def display(self):
+        print(self.name + "'s age is: " + str(self.age))
+
+
+class Man(Person):
+    sex = 'Male'
+
+
+man = Man.fromBirthYear('John', 1985)
+man.display()
+print(isinstance(man, Man))
+
+
+man1 = Man.fromFathersAge('John', 1965, 20)
+man.display()
+print(isinstance(man1, Man))
+
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
