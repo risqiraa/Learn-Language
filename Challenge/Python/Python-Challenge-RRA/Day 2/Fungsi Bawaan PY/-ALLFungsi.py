@@ -354,7 +354,6 @@ print(z)  # (0j)
 z = complex('5-9j')
 print(z)  # (5-9j)
 # ────────────────────────────────────────────────────────────────────────────────
-# ────────────────────────────────────────────────────────────────────────────────
 
 a = 2+3j
 print('a =', a)  # 2+3j
@@ -374,6 +373,111 @@ print('Type of c is', type(d))  # Type of d is <class 'complex'>
 
 # ────────────────────────────────────────────────────────────────────────────────
 # ────────────────────────────────────────────────────────────────────────────────
+
+# TODO ─── Penggunaan Fungsi Delattr ──────────────────────────────────────────────────
+# Delattr() menghapus atribut dari objek (jika objek mengizinkannya).
+# Syntax : delattr(objek, nama)
+# delattr()membutuhkan dua parameter:
+#   -objek - objek dari mana nama atribut harus dihapus
+#   -name - string yang harus berupa nama atribut yang akan dihapus dariobyek
+# delattr()tidak mengembalikan nilai apa pun(mengembalikan None).
+# Itu hanya menghapus atribut(jika objek mengizinkannya).
+# #
+
+
+class Coordinate:
+    x = 10
+    y = -5
+    z = 0
+
+
+point1 = Coordinate()
+
+print('x = ', point1.x)
+print('y = ', point1.y)
+print('z = ', point1.z)
+
+delattr(Coordinate, 'z')
+
+print('--After deleting z attribute--')
+print('x = ', point1.x)  # x = 10
+print('y = ', point1.y)  # y =  -5
+
+# Raises Error
+# AttributeError: 'Coordinate' object has no attribute 'z'
+print('z = ', point1.z)
+
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+class Coordinate:
+    x = 10
+    y = -5
+    z = 0
+
+
+point1 = Coordinate()
+
+print('x = ', point1.x)
+print('y = ', point1.y)
+print('z = ', point1.z)
+
+# Deleting attribute z
+del Coordinate.z
+
+print('--After deleting z attribute--')
+print('x = ', point1.x)
+print('y = ', point1.y)
+
+# Raises Attribute Error
+print('z = ', point1.z)
+
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Penggunaan Fungsi Dict ─────────────────────────────────────────────────────
+# Konstruktor dict() membuat kamus dengan Python.
+# Syntax : class dict(**kwarg)
+# class dict(mapping, **kwarg)
+# class dict(iterable, **kwarg)
+# Catatan: **kwarg biarkan Anda mengambil sejumlah argumen kata kunci yang berubah-ubah.
+#
+"""Argumen kata kunci adalah argumen yang didahului oleh pengenal (mis. name=). 
+Oleh karena itu, argumen kata kunci dari formulir kwarg=value diteruskan ke dict()konstruktor 
+untuk membuat kamus."""
+#
+# dict()tidak mengembalikan nilai apa pun (mengembalikan None).
+# #
+
+# ─── Contoh 1: Buat Kamus Menggunakan Argumen Kata Kunci Saja ───────────────────
+
+numbers = dict(x=5, y=0)
+print('numbers =', numbers)  # numbers = {'x': 5, 'y': 0}
+print(type(numbers))  # < class 'dict' >
+
+empty = dict()
+print('empty =', empty)  # empty = {}
+print(type(empty))  # < class 'dict' >
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# ─── Contoh 2: Buat Kamus Menggunakan Iterable ──────────────────────────────────
+
+# keyword argument is not passed
+numbers1 = dict([('x', 5), ('y', -5)])
+print('numbers1 =', numbers1)  # numbers1 = {'x' : 5, 'y' : -5}
+
+# keyword argument is also passed
+numbers2 = dict([('x', 5), ('y', -5)], z=8)
+print('numbers2 =', numbers2)  # numbers2 = {'x' : 5, 'y' : -5, 'z' : 8}
+
+# zip() creates an iterable in Python 3
+numbers3 = dict(zip(['x', 'y', 'z'], [1, 2, 3]))
+print('numbers3 =', numbers3)  # numbers3 = {'x': 1, 'y': 2, 'z': 3}
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+
 
 # ─── Penggunaan Fungsi Dir ──────────────────────────────────────────────────────
 # Metode dir()mengembalikan daftar atribut yang valid dari objek yang diteruskan.
@@ -420,4 +524,3 @@ print(dir(number1))
 # Output : ['__add__', '__class__', '__class_getitem__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'clear', 'copy', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
 
 # ────────────────────────────────────────────────────────────────────────────────
-
