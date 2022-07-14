@@ -68,9 +68,10 @@ print('The sum is:', Mathematics.addNumbers(5, 10))
 
 # ────────────────────────────────────────────────────────────────────────────────
 
+
+# Kapan Anda menggunakan metode statis?
+# ─── 1. Mengelompokkan Fungsi Utilitas Ke Kelas ─────────────────────────────────
 """
-Kapan Anda menggunakan metode statis?
-1. Mengelompokkan fungsi utilitas ke kelas
 Metode statis memiliki kasus penggunaan terbatas karena, seperti metode kelas atau metode lain 
 apa pun di dalam kelas, mereka tidak dapat mengakses properti kelas itu sendiri.
 
@@ -105,3 +106,54 @@ else:
 
 # ────────────────────────────────────────────────────────────────────────────────
 
+"""
+Di sini, kami memiliki Dateskelas yang hanya berfungsi dengan tanggal dengan tanda hubung. Namun, di database kami sebelumnya, semua tanggal ada dalam garis miring.
+Untuk mengonversi slash-dates menjadi dash-dates, kami telah membuat fungsi utilitas toDashDatedi dalam Dates.
+Ini adalah metode statis karena tidak perlu mengakses properti Datesitu sendiri dan hanya membutuhkan parameter.
+Kami juga dapat membuat toDashDatedi luar kelas, tetapi karena ini hanya berfungsi untuk tanggal, logis untuk menyimpannya di dalam Dateskelas.
+"""
+
+# ─── 2. Memiliki Implementasi Tunggal ───────────────────────────────────────────
+# Metode statis digunakan ketika kita tidak ingin subkelas dari suatu kelas
+# mengubah/menimpa implementasi metode tertentu.
+
+
+# ─── Contoh 3: Bagaimana Pewarisan Bekerja Dengan Metode Statis ─────────────────
+class Dates:
+    def __init__(self, date):
+        self.date = date
+
+    def getDate(self):
+        return self.date
+
+    @staticmethod
+    def toDashDate(date):
+        return date.replace("/", "-")
+
+
+class DatesWithSlashes(Dates):
+    def getDate(self):
+        return Dates.toDashDate(self.date)
+
+
+date = Dates("15-12-2016")
+dateFromDB = DatesWithSlashes("15/12/2016")
+
+if(date.getDate() == dateFromDB.getDate()):
+    print("Equal")
+else:
+    print("Unequal")
+
+# Output is : Equal/Setara
+
+# ────────────────────────────────────────────────────────────────────────────────
+
+"""
+Di sini, kami tidak ingin subkelas DatesWithSlashesmenimpa metode utilitas statis toDashDatekarena hanya memiliki satu penggunaan, 
+yaitu mengubah tanggal menjadi tanggal putus-putus.
+Kita dapat dengan mudah menggunakan metode statis untuk keuntungan kita dengan 
+getDate()mengganti metode di subkelas sehingga bekerja dengan baik dengan DatesWithSlasheskelas.
+"""
+
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
