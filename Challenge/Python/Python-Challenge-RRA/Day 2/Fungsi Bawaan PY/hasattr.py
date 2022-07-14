@@ -1,4 +1,4 @@
-# ─── Penggunaan Fungsi Hasattr ──────────────────────────────────────────────────
+#TODO ─── Penggunaan Fungsi Hasattr ──────────────────────────────────────────────────
 # Metode hasattr()mengembalikan true jika suatu objek memiliki atribut bernama yang diberikan dan false jika tidak.
 # Syntax : hasattr(object, name)
 # Metode hasattr()ini mengambil dua parameter:

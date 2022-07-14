@@ -1,4 +1,4 @@
-# ─── Penggunaan Fungsi Getattr ──────────────────────────────────────────────────
+#TODO ─── Penggunaan Fungsi Getattr ──────────────────────────────────────────────────
 # Metode getattr()mengembalikan nilai atribut bernama dari suatu objek. Jika tidak ditemukan,
 # itu mengembalikan nilai default yang diberikan ke fungsi.
 # Syntax : getattr(object, name[, default])

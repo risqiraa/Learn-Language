@@ -1,4 +1,4 @@
-# ─── Pengguanan Fungsi Globals ──────────────────────────────────────────────────
+#TODO ─── Pengguanan Fungsi Globals ──────────────────────────────────────────────────
 # Metode globals()ini mengembalikan kamus dengan semua variabel dan simbol global untuk program saat ini.
 # Syntax : globals()
 # Metode globals()ini tidak mengambil parameter apa pun.

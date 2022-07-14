@@ -1,4 +1,4 @@
-# ─── Penggunaan Fungsi float ────────────────────────────────────────────────────
+#TODO ─── Penggunaan Fungsi float ────────────────────────────────────────────────────
 # Metode float()mengembalikan angka floating point dari angka atau string.
 # Syntax : float([x])
 # Metode float()ini mengambil satu parameter:
