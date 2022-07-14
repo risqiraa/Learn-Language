@@ -1,4 +1,4 @@
-# ─── Penggunaan Fungsi Static Method ────────────────────────────────────────────
+#TODO ─── Penggunaan Fungsi Static Method ────────────────────────────────────────────
 # Fungsi staticmethod()bawaan mengembalikan metode statis untuk fungsi tertentu.
 # Syntax : staticmethod(function)
 #
