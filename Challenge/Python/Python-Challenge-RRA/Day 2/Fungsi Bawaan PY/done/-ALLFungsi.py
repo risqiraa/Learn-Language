@@ -2,6 +2,7 @@
 # abs() digunakan untuk mengembalikan nilai mutlak suatu bilangan
 # misalnya |3| = 3 dan |-3|=3
 
+from math import *
 from datetime import date
 print("abs(-15) : ", abs(-15))  # 15
 print("abs(10.32) : ", abs(10.32))  # 10.32
@@ -1346,3 +1347,188 @@ Di sisi lain, untuk atribut apa pun yang tidak ada di kelas Carseperti specs , k
 """
 # ────────────────────────────────────────────────────────────────────────────────
 # ────────────────────────────────────────────────────────────────────────────────
+
+
+# TODO ─── Penggunaan Fugnsi Hash ─────────────────────────────────────────────────────
+# Metode hash()mengembalikan nilai hash suatu objek jika memilikinya.
+# Nilai hash hanyalah bilangan bulat yang digunakan untuk membandingkan kunci kamus
+# selama kamus terlihat dengan cepat.
+#
+# Syntax : hash(object)
+# Metode hash()ini mengambil satu parameter:
+#   -objek - objek yang nilai hashnya akan dikembalikan (integer, string, float)
+# Metode hash()mengembalikan nilai hash dari suatu objek.
+# #
+
+# ─── Contoh 0 ───────────────────────────────────────────────────────────────────
+text = 'Python Programming'
+
+# compute the hash value of text
+hash_value = hash(text)
+print(hash_value)
+
+# Output: -966697084172663693
+
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 1: Bagaimana Hash Bekerja Dengan Python ─────────────────────────────
+# hash for integer unchanged
+print('Hash for 181 is:', hash(181))
+# Ouput : Hash untuk 181 adalah: 181
+
+# hash for decimal
+print('Hash for 181.23 is:', hash(181.23))
+# Ouput : Hash untuk 181,23 adalah: 530343892119126197
+
+# hash for string
+print('Hash for Python is:', hash('Python'))
+# Ouput : Hash untuk Python adalah: 2230730083538390373
+
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 2: Hash Untuk Objek Tuple Yang Tidak Dapat Diubah ───────────────────
+# hash()metode hanya berfungsi untuk objek yang tidak dapat diubah sebagai Tuple .
+# #
+
+# tuple of vowels
+vowels = ('a', 'e', 'i', 'o', 'u')
+
+print('The hash is:', hash(vowels))
+# Ouput : The hash is: -695778075465126279
+
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 3: Hash Untuk Objek Kustom Dengan Mengganti __hash__ ────────────────
+
+
+class Person:
+    def __init__(self, age, name):
+        self.age = age
+        self.name = name
+
+    def __eq__(self, other):
+        return self.age == other.age and self.name == other.name
+
+    def __hash__(self):
+        print('The hash is:')
+        return hash((self.age, self.name))
+
+
+person = Person(23, 'Adam')
+print(hash(person))
+
+# Output : Hashnya adalah: 3785419240612877014
+#! Catatan: Anda tidak harus mengimplementasikan __eq__()metode untuk hash karena metode ini dibuat secara default untuk semua objek.
+
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# TODO ─── Penggunaan Fungsi Help ─────────────────────────────────────────────────────
+# Metode help() memanggil sistem bantuan Python bawaan.
+# Syntax : help(object)
+# Metode help()ini mengambil maksimal satu parameter.
+#   -objek (opsional) - Anda ingin menghasilkan bantuan yang diberikanobject
+# #
+
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+
+"""
+How help() works in Python?
+The help() method is used for interactive use. 
+It's recommended to try it in your interpreter when you need help to write Python program 
+and use Python modules.
+#!Note: object is passed to help() (not a string)    
+"""
+
+# ? Try these on Python shell.
+
+help(list)
+help(dict)
+help(print)
+help([1, 2, 3])
+
+# Jika string dilewatkan sebagai argumen, nama modul, fungsi, kelas, metode, kata kunci,
+# atau topik dokumentasi, dan halaman bantuan dicetak.
+#! Catatan: string dilewatkan sebagai argumen kehelp()
+# #
+
+"""
+Jika stringditeruskan sebagai argumen, string yang diberikan akan dicari sebagai nama modul, 
+fungsi, kelas, metode, kata kunci, atau topik dokumentasi, dan halaman bantuan dicetak.    
+"""
+
+help('random thing')
+help('print')
+help('def')
+help('math.pow')
+
+#! Catatan: tidak ada argumen yang diteruskan kehelp()
+
+
+# Jika tidak ada argumen yang diteruskan, utilitas bantuan Python(sistem bantuan interaktif)
+# dimulai di konsol.
+
+help()
+
+# Kemudian, Anda dapat memasukkan nama topik untuk mendapatkan bantuan dalam menulis program Python
+# dan menggunakan modul Python. Sebagai contoh:
+
+help > True
+help > 'print'
+help > print
+
+# Untuk keluar dari utilitas bantuan dan kembali ke juru bahasa, Anda perlu mengetik quitdan menekan enter.
+
+help > quit
+
+
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# TODO ─── Penggunaan Fungsi Hex ──────────────────────────────────────────────────────
+# Fungsi hex() mengonversi bilangan bulat ke string heksadesimal yang sesuai.
+# Syntax : hex(x)
+# hex()fungsi mengambil satu argumen.
+# x - bilangan bulat ( intobjek atau harus mendefinisikan __index__()metode yang mengembalikan bilangan bulat)
+#
+# hex()fungsi mengonversi bilangan bulat ke bilangan heksadesimal yang sesuai dalam bentuk string dan mengembalikannya.
+# String heksadesimal yang dikembalikan dimulai dengan awalan yang 0xmenunjukkan bahwa itu dalam bentuk heksadesimal.
+# #
+
+
+# ─── Contoh 1 Bagaimana Hex Bekerja ─────────────────────────────────────────────
+number = 435
+print(number, 'in hex =', hex(number))
+# Output : 435 dalam hex = 0x1b3
+number = 0
+print(number, 'in hex =', hex(number))
+# Output : 0 dalam hex = 0x0
+number = -34
+print(number, 'in hex =', hex(number))
+# Output : -34 dalam hex = -0x22
+returnType = type(hex(number))
+print('Return type from hex() is', returnType)
+# Output :Jenis pengembalian dari hex() adalah <class 'str'>
+# ────────────────────────────────────────────────────────────────────────────────
+"""
+Jika Anda perlu menemukan representasi heksadesimal dari float, Anda perlu menggunakan float.hex()metode.
+"""
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 2: Representasi Heksadesimal Dari Float ─────────────────────────────
+number = 2.5
+print(number, 'in hex =', float.hex(number))
+# Output : 2,5 dalam hex = 0x1.4000000000000p+1
+number = 0.0
+print(number, 'in hex =', float.hex(number))
+# Output : 0,0 dalam heksa = 0x0.0p+0
+number = 10.5
+print(number, 'in hex =', float.hex(number))
+# Output : 10,5 dalam heksa = 0x1.5000000000000p+3
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+

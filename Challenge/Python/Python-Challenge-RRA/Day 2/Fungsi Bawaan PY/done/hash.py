@@ -1,4 +1,4 @@
-# ─── Penggunaan Fugnsi Hash ─────────────────────────────────────────────────────
+#TODO ─── Penggunaan Fugnsi Hash ─────────────────────────────────────────────────────
 # Metode hash()mengembalikan nilai hash suatu objek jika memilikinya.
 # Nilai hash hanyalah bilangan bulat yang digunakan untuk membandingkan kunci kamus
 # selama kamus terlihat dengan cepat.

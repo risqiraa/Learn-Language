@@ -1,4 +1,4 @@
-# ─── Penggunaan Fungsi Help ─────────────────────────────────────────────────────
+#TODO ─── Penggunaan Fungsi Help ─────────────────────────────────────────────────────
 # Metode help() memanggil sistem bantuan Python bawaan.
 # Syntax : help(object)
 # Metode help()ini mengambil maksimal satu parameter.
