@@ -1532,3 +1532,311 @@ print(number, 'in hex =', float.hex(number))
 # ────────────────────────────────────────────────────────────────────────────────
 # ────────────────────────────────────────────────────────────────────────────────
 
+# TODO ─── Penggunaan Fungsi Id ───────────────────────────────────────────────────────
+# Metode id()ini mengembalikan bilangan bulat unik (identitas) dari objek argumen yang diteruskan.
+# Sintaks dari id()metode ini adalah: id(object)
+# Metode id()ini mengambil satu parameter:
+#   -obyek- dapat berupa kelas, variabel, daftar, tupel, set, dll.
+# Metode id()mengembalikan:
+#   -identitas objek (yang merupakan bilangan bulat unik untuk objek tertentu)
+# #
+
+# ─── Contoh 0 ───────────────────────────────────────────────────────────────────
+a = 5
+b = 6
+sum = a + b
+
+# id of sum variable
+print("The id of sum is", id(sum))
+# Output: The id of sum is 1877287371312
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# ─── Contoh 1 : Python Id ───────────────────────────────────────────────────────
+# id of 5
+print("id of 5 =", id(5))
+# Output: id of 5 = 2037968011632
+
+a = 5
+# id of a
+print("id of a =", id(a))
+# Output: id of a = 2037968011632
+
+b = a
+# id of b
+print("id of b =", id(b))
+# Output: id of b = 2037968011632
+
+c = 5.0
+# id of c
+print("id of c =", id(c))
+# Output: id of c = 2037968011632
+# ────────────────────────────────────────────────────────────────────────────────
+"""
+Di sini, id()metode mengembalikan nomor integer unik untuk setiap nilai unik yang digunakannya.
+Dalam contoh di atas, kami telah menggunakan id()metode dengan variabe a,b dan c dan mendapatkan id yang sesuai.
+Seperti yang Anda lihat, id()metode ini mengembalikan bilangan bulat 2037968011632 untuk keduanya a = 5 dan 5.0
+Karena kedua nilainya sama, idnya juga sama.
+#!Catatan : Karena ID adalah alamat memori yang ditetapkan, ID dapat berbeda di sistem yang berbeda. Jadi, output pada sistem Anda bisa berbeda.
+"""
+
+# ─── Contoh 2 : Id dengan kelas dan object ──────────────────────────────────────
+
+
+class Food:
+    banana = 15
+
+
+dummyFood = Food()
+
+#  id of the object dummyFood
+print("id of dummyFoo =", id(dummyFood))
+# Output : id of dummyFoo = 3074880666976
+# ?Ketika kita menggunakan id()metode dengan dummyFoodobjek, kita mendapatkan hasil 139984002204864 .
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 3: Id Dengan Set ────────────────────────────────────────────────────
+
+fruits = {"apple", "banana", "cherry", "date"}
+
+# id() of the set fruits
+print("The id of the fruits set is", id(fruits))
+# Output : The id of the fruits set is 1969766393088
+# ? Dalam contoh di atas, kami telah menggunakan id()metode dengan set fruit. Dalam hal ini, kami mendapatkan nomor unik sebagai id untuk set- 140533973276928 .
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 4 : Id Dengan Tuples ────────────────────────────────────────────────
+vegetables = ("asparagus", "basil", "cabbage")
+
+# id() with vegetable
+print("The id of the vegetables set is", id(vegetables))
+# The id of the vegetables set is 2283407349376
+# ? Metode id()mengembalikan nomor unik 139751433263360 sebagai id dari tuple vegetable.
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# TODO ─── Penggunaan Fungsi Input ────────────────────────────────────────────────────
+# Fungsi input()mengambil input dari pengguna dan mengembalikannya.
+# Syntax : input([prompt])
+# Fungsi input()mengambil satu argumen opsional:
+#   -prompt (Opsional) - string yang ditulis ke output standar (biasanya layar) tanpa mengikuti baris baru
+# Fungsi input()membaca baris dari input (biasanya dari pengguna), mengubah baris menjadi string dengan menghapus baris baru yang tertinggal, dan mengembalikannya.
+# Jika EOF dibaca, itu menimbulkan EOFErrorpengecualian.
+# #
+
+
+# ─── Contoh 0 ───────────────────────────────────────────────────────────────────
+name = input("Enter your name: ")
+print(name)
+
+# Output:
+# Enter your name: James
+# James
+
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 1 Bagaimana Input Bekerja Dengan Python ─────────────────────────────
+# get input from user
+
+inputString = input()
+
+print('The inputted string is:', inputString)
+# Output : The inputted string is: Risqi
+# Risqi
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 2: Dapatkan Masukan Dari Pengguna Dengan Prompt ─────────────────────
+# get input from user
+
+inputString = input('Enter a string:')
+
+print('The inputted string is:', inputString)
+# Output : Enter a string : risqi
+# The inputted string is: risqi
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# TODO ─── Penggunaan Fungs Int ───────────────────────────────────────────────────────
+# Metode int()ini mengonversi string apa pun, objek seperti byte, atau angka menjadi bilangan bulat dan kembali.
+# Syntax : int(value, base [optional])
+# int()metode membutuhkan dua parameter:
+#   -nilai- string numerik, objek seperti byte atau angka apa pun
+#   -dasar [opsional]- sistem angka tempat nilainya saat ini
+# Metode int()mengembalikan:
+#   -bagian integer dari nomor - untuk nilai argumen tunggal (nomor apa saja)
+#   -0 - tanpa argumen
+#   -representasi bilangan bulat dari angka dengan basis yang diberikan (0, 2 ,8 ,10,16)
+# #
+
+# ─── Contoh 0 ───────────────────────────────────────────────────────────────────
+# returns the integer representation of the binary string 1010
+print("For 1010, int is:", int("1010", 2))
+
+# Output: For 1010, int is: 10
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 1 : Python int Argumen Tunggal ──────────────────────────────────────
+
+# int() with an integer value
+print("int(123) is:", int(123))
+# Output: int(123) is: 123
+
+# int() with a floating point value
+print("int(123.23) is:", int(123.23))
+# Output: int(123.23) is: 123
+
+# int() with a numeric-string value
+print("int('123') is:", int("123"))
+# Output: int('123') is: 123
+
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 2 : Python Int Dua Argumen ──────────────────────────────────────────
+# converting a binary to integer with int()
+print("For 0b101, int is:", int("0b101", 2))
+# Output: For 0b101, int is: 5
+
+# converting a binary to integer with int())
+print("For 0o16, int is:", int("0o16", 8))
+# Output: For 0o16, int is: 14
+
+
+# converting a binary to integer with int()
+print("For 0xA, int is:", int("0xA", 16))
+# Output: For 0xA, int is: 10
+
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 3: Int Untuk Objek Khusus ───────────────────────────────────────────
+"""
+Bahkan jika suatu objek bukan angka, kita masih dapat mengubahnya menjadi objek integer.
+Kita dapat melakukan ini dengan mudah dengan mengganti __index__()dan __int__()metode kelas untuk mengembalikan angka.
+Kedua metode itu identik. Versi Python yang lebih baru menggunakan __index__()metode ini.
+"""
+
+
+class Person:
+    age = 23
+
+    def __index__(self):
+        return self.age
+
+    # def __int__(self):
+    #     return self.age
+
+
+person = Person()
+
+# int() method with a non integer object person
+print("int(person) is:", int(person))
+# Output: int(person) is: 23
+
+
+# ────────────────────────────────────────────────────────────────────────────────
+"""
+Dalam contoh di atas, kelasnya Personbukan tipe integer.
+Tapi kita masih bisa mengembalikanusiavariabel (yang merupakan bilangan bulat) menggunakan int()metode.
+"""
+
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# TODO ─── Penggunaan Fungsi Isinstance ───────────────────────────────────────────────
+# Fungsi isinstance()memeriksa apakah objek(argumen pertama) adalah turunan atau subkelas dari kelas classinfo(argumen kedua).
+# Syntax : isinstance(object, classinfo)
+# isinstance()membutuhkan dua parameter:
+#   -objek - objectuntuk diperiksa
+#   -classinfo - kelas, tipe, atau tupel kelas dan tipe
+# isinstance() mengembalikan:
+#   -True jika obyek adalah turunan atau subkelas dari kelas atau elemen apa pun dari Tuple
+#   -False jika tidak
+#! Jikainfo kelasbukan tipe atau tupel tipe, TypeErrorpengecualian dimunculkan.
+# #
+
+# ─── Contoh 0 ───────────────────────────────────────────────────────────────────
+numbers = [1, 2, 3, 4, 2, 5]
+
+# check if numbers is instance of list
+result = isinstance(numbers, list)
+print(result)
+
+# Output: True
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 1 : Cara Kerja Isinstance ───────────────────────────────────────────
+
+
+class Foo:
+    a = 5
+
+
+fooInstance = Foo()
+
+print(isinstance(fooInstance, Foo))  # True
+print(isinstance(fooInstance, (list, tuple)))  # False
+print(isinstance(fooInstance, (list, tuple, Foo)))  # True
+
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 2: Bekerja Dari Isinstance Dengan Native Types ──────────────────────
+numbers = [1, 2, 3]
+
+result = isinstance(numbers, list)
+print(numbers, 'instance of list?', result)
+# Output : [1, 2, 3] instance of list? True
+
+result = isinstance(numbers, dict)
+print(numbers, 'instance of dict?', result)
+# Output : [1, 2, 3] instance of dict? False
+
+result = isinstance(numbers, (dict, list))
+print(numbers, 'instance of dict or list?', result)
+# Output : [1, 2, 3] instance of dict or list? True
+
+number = 5
+result = isinstance(number, list)
+print(number, 'instance of list?', result)
+# Output : 5 instance of list? Fals
+
+result = isinstance(number, int)
+print(number, 'instance of int?', result)
+# Output : 5 instance of int? True
+
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+
+#TODO ─── Penggunaan Fungsi Issubclass ───────────────────────────────────────────────
+# Fungsi issubclass() memeriksa apakah argumen kelas (argumen pertama) adalah subkelas dari kelas classinfo (argumen kedua).
+# Syntax : issubclass(class, classinfo)
+# issubclass()membutuhkan dua parameter:
+#   -kelas - kelas yang akan diperiksa
+#   -classinfo - kelas, tipe, atau tupel kelas dan tipe
+# issubclass()mengembalikan:
+#   -Truejikakelasadalah subclass dari kelas, atau elemen apa pun dari Tuple
+#   -Falsejika tidak
+# #
+
+# ─── Contoh: Bagaimana Cara Kerja Issubclass ────────────────────────────────────
+
+
+class Polygon:
+    def __init__(polygonType):
+        print('Polygon is a ', polygonType)
+
+
+class Triangle(Polygon):
+    def __init__(self):
+
+        Polygon.__init__('triangle')
+
+
+print(issubclass(Triangle, Polygon))  # True
+print(issubclass(Triangle, list))  # False
+print(issubclass(Triangle, (list, Polygon)))  # True
+print(issubclass(Polygon, (list, Polygon)))  # True
+
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
