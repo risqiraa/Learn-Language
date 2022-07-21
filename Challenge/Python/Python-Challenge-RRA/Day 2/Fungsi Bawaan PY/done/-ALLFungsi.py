@@ -1840,3 +1840,869 @@ print(issubclass(Polygon, (list, Polygon)))  # True
 
 # ────────────────────────────────────────────────────────────────────────────────
 # ────────────────────────────────────────────────────────────────────────────────
+
+
+# TODO ─── Penggunaan Fungsi Iter ─────────────────────────────────────────────────────
+# Metode iter()mengembalikan iterator untuk argumen yang diberikan.
+# Syntax : iter(object, sentinel [optional])
+# Metode iter()ini mengambil dua parameter:
+#   -obyek- bisa berupa list, set, tuple, dll.
+#   -sentinel [optional] - a special value that is used to represent the end of a sequence
+# Metode iter()mengembalikan:
+#   -objek iterator untuk argumen yang diberikan sampai karakter sentinel ditemukan
+#   -TypeError untuk objek yang ditentukan pengguna yang tidak mengimplementasikan __iter__(), dan __next__()atau__getitem()__
+#
+# #
+
+# ─── Contoh 0 ───────────────────────────────────────────────────────────────────
+# list of vowels
+phones = ['apple', 'samsung', 'oneplus']
+phones_iter = iter(phones)
+
+print(next(phones_iter))
+print(next(phones_iter))
+print(next(phones_iter))
+
+# Output:
+# apple
+# samsung
+# oneplus
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 1 : Python Iter ─────────────────────────────────────────────────────
+# list of vowels
+vowels = ["a", "e", "i", "o", "u"]
+
+# iter() with a list of vowels
+vowels_iter = iter(vowels)
+
+print(next(vowels_iter))  # Output : a
+print(next(vowels_iter))  # Output : e
+print(next(vowels_iter))  # Output : i
+print(next(vowels_iter))  # Output : o
+print(next(vowels_iter))  # Output :u
+
+# ────────────────────────────────────────────────────────────────────────────────
+
+"""
+Dalam contoh di atas, kami telah menggunakan iter()metode dengan daftar vokal.
+Metode mengembalikan elemen individu a, e, i, o, u dalam daftar sebagai objek iterator.    
+"""
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 2 : Iter Untuk Object Khusus ────────────────────────────────────────
+
+
+class PrintNumber:
+    def __init__(self, max):
+        self.max = max
+
+# iter() method in a class
+    def __iter__(self):
+        self.num = 0
+        return self
+# next() method in a class
+
+    def __next__(self):
+        if(self.num >= self.max):
+            raise StopIteration
+        self.num += 1
+        return self.num
+
+
+print_num = PrintNumber(3)
+
+print_num_iter = iter(print_num)
+print(next(print_num_iter))  # 1
+print(next(print_num_iter))  # 2
+print(next(print_num_iter))  # 3
+
+# raises StopIteration
+print(next(print_num_iter))
+""" Output :
+Traceback (panggilan terakhir terakhir): 
+  File "", baris 23, di 
+File "", baris 11, di __next__ 
+StopIteration
+"""
+
+# ────────────────────────────────────────────────────────────────────────────────
+
+"""
+Pada contoh di atas, kami telah mencetak nomor iterator 1 , 2 , 3 menggunakan metode __iter__()and __next__() .
+Di sini, __next()__metode di sini memiliki loop yang berjalan hingga self.numlebih besar dari atau sama dengan self.max.
+Karena kami telah melewati 3 sebagai parameter ke PrintNumber()objek, self.maxdiinisialisasi ke 3 . Oleh karena itu, loop berhenti di 3 .
+Ketika self.nummencapai nilai self.maxyang 3 , next()metode ini memunculkan pengecualian StopIteration .
+"""
+
+
+# ─── Contoh 3 : Iter Dengan Parameter Sentinel ──────────────────────────────────
+
+class DoubleIt:
+
+    def __init__(self):
+        self.start = 1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        self.start *= 2
+        return self.start
+
+    __call__ = __next__
+
+
+my_iter = iter(DoubleIt(), 16)
+
+for x in my_iter:
+    print(x)
+
+# Output :
+# 2
+# 4
+# 8
+# ────────────────────────────────────────────────────────────────────────────────
+"""
+Dalam contoh di atas, kami belum menerapkan StopIterationkondisi.
+Sebagai gantinya, kami telah menggunakan iter()metode dengan parameter sentinel untuk menghentikan iterasi:
+"""
+#my_iter = iter(DoubleIt(), 16)
+"""
+Nilai parameter sentinel disini adalah 16 sehingga program akan berhenti ketika nilai dari __next__()metode sama dengan angka tersebut.
+Pada titik ini dalam kode, program akan menaikkan secara StopIterationotomatis.
+"""
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# TODO ─── Penggunaan Fungsi Len ──────────────────────────────────────────────────────
+# Fungsi len()mengembalikan jumlah item (panjang) dalam suatu objek.
+# Syntax : len(s)
+# Fungsi len()mengambil satu argumen s , yang dapat berupa
+#   -urutan - string, byte, Tuple, daftar, rentang ATAU,
+#   -koleksi - kamus, set, set beku
+# len()fungsi mengembalikan jumlah item dari suatu objek.
+# Gagal memberikan argumen atau memberikan argumen yang tidak valid akan memunculkan TypeErrorpengecualian.
+# #
+
+
+# ─── Contoh 0 ───────────────────────────────────────────────────────────────────
+languages = ['Python', 'Java', 'JavaScript']
+
+# compute the length of languages
+length = len(languages)
+print(length)
+
+# Output: 3
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 1: Bagaimana Len Bekerja Dengan Tupel Daftar Dan Rentang ────────────
+testList = []
+print(testList, 'length is', len(testList))
+# Output :[] panjangnya adalah 0
+
+testList = [1, 2, 3]
+print(testList, 'length is', len(testList))
+# Output :[1, 2, 3] panjangnya adalah 3
+
+testTuple = (1, 2, 3)
+print(testTuple, 'length is', len(testTuple))
+# Output :(1, 2, 3) panjangnya adalah 3
+
+testRange = range(1, 10)
+print('Length of', testRange, 'is', len(testRange))
+# Output : Panjang jangkauan(1, 10) adalah 9
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 2: Bagaimana Len Bekerja Dengan String Dan Byte ─────────────────────
+testString = ''
+print('Length of', testString, 'is', len(testString))
+# Output : Panjangnya adalah 0
+
+testString = 'Python'
+print('Length of', testString, 'is', len(testString))
+# Output : Panjang Python adalah 6
+
+# byte object
+testByte = b'Python'
+print('Length of', testByte, 'is', len(testByte))
+# Output :Panjang b'Python' adalah 6
+
+testList = [1, 2, 3]
+# converting to bytes object
+testByte = bytes(testList)
+print('Length of', testByte, 'is', len(testByte))
+# Output :Panjang b'\x01\x02\x03' adalah3
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# ─── Contoh 3: Bagaimana Len Bekerja Dengan Kamus Dan Set ───────────────────────
+testSet = {1, 2, 3}
+print(testSet, 'length is', len(testSet))
+# Ouput : {1, 2, 3} panjangnya adalah 3
+
+# Empty Set
+testSet = set()
+print(testSet, 'length is', len(testSet))
+# Ouput : set() panjangnya 0
+
+testDict = {1: 'one', 2: 'two'}
+print(testDict, 'length is', len(testDict))
+# Ouput : {1: 'one', 2: 'two'} length is 2
+
+testDict = {}
+print(testDict, 'length is', len(testDict))
+# Ouput : {} length is 0
+
+testSet = {1, 2}
+# frozenSet
+frozenTestSet = frozenset(testSet)
+print(frozenTestSet, 'length is', len(frozenTestSet))
+# Ouput : frozenset({1, 2}) length is 2
+
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# ─── Contoh 4: Bagaimana Len Bekerja Untuk Objek Kustom ─────────────────────────
+class Session:
+    def __init__(self, number=0):
+        self.number = number
+
+    def __len__(self):
+        return self.number
+
+
+# default length is 0
+s1 = Session()
+print(len(s1))  # Output : 0
+
+
+# giving custom length
+s2 = Session(6)
+print(len(s2))  # Output : 6
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# TODO ─── Penggunaan Fungsi List ─────────────────────────────────────────────────────
+# Konstruktor list()mengembalikan daftar dengan Python.
+# Syntax : list([iterable])
+# Konstruktor list()mengambil satu argumen:
+#   -iterable (opsional) - objek yang bisa berupa urutan ( string , tupel ) atau koleksi ( set , dictionary ) atau objek iterator apa pun
+# Konstruktor list()mengembalikan daftar.
+#   -Jika tidak ada parameter yang dilewatkan, ia mengembalikan daftar kosong
+#   -Jika iterable dilewatkan sebagai parameter, itu membuat daftar yang terdiri dari item iterable.
+# #
+
+# ─── Contoh 0 ───────────────────────────────────────────────────────────────────
+text = 'Python'
+
+# convert string to list
+text_list = list(text)
+print(text_list)
+
+# check type of text_list
+print(type(text_list))
+
+# Output: ['P', 'y', 't', 'h', 'o', 'n']
+#         <class 'list'>
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 1: Buat Daftar Dari String Tupel Dan Daftar ─────────────────────────
+# empty list
+print(list())  # Output:[]
+
+# vowel string
+vowel_string = 'aeiou'
+print(list(vowel_string))  # Output:['a', 'e', ​​'i', 'o', 'u']
+
+# vowel tuple
+vowel_tuple = ('a', 'e', 'i', 'o', 'u')
+print(list(vowel_tuple))  # Output: ['a', 'e', ​​'i', 'o', 'u']
+
+# vowel list
+vowel_list = ['a', 'e', 'i', 'o', 'u']
+print(list(vowel_list))  # Output: ['a', 'e', 'i', 'o', 'u']
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# ─── Contoh 2: Buat Daftar Dari Set Dan Kamus ───────────────────────────────────
+# vowel set
+vowel_set = {'a', 'e', 'i', 'o', 'u'}
+print(list(vowel_set))  # Output : ['a', 'o', 'u', 'e', 'i']
+
+# vowel dictionary
+vowel_dictionary = {'a': 1, 'e': 2, 'i': 3, 'o': 4, 'u': 5}
+print(list(vowel_dictionary))  # Output :['o', 'e', 'a', 'u', 'i']
+
+#!Catatan: Dalam kasus kamus, kunci kamus akan menjadi item dari daftar. Juga, urutan elemen akan acak.
+
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 3: Buat Daftar Dari Objek Iterator ──────────────────────────────────
+# objects of this class are iterators
+
+
+class PowTwo:
+    def __init__(self, max):
+        self.max = max
+
+    def __iter__(self):
+        self.num = 0
+        return self
+
+    def __next__(self):
+        if(self.num >= self.max):
+            raise StopIteration
+        result = 2 ** self.num
+        self.num += 1
+        return result
+
+
+pow_two = PowTwo(5)
+pow_two_iter = iter(pow_two)
+
+print(list(pow_two_iter))
+# Output : [1, 2, 4, 8, 16]
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# TODO ─── Penggunaan Fungsi Local ────────────────────────────────────────────────────
+# Metode locals()mengembalikan kamus dengan semua variabel dan simbol lokal untuk program saat ini.
+# Syntax : locals()
+# Metode locals()ini tidak mengambil parameter apa pun.
+# Metode locals()mengembalikan kamus tabel simbol lokal saat ini.
+# #
+
+# ─── Contoh 0 ───────────────────────────────────────────────────────────────────
+print(locals())
+# Output :
+"""
+{'In': ['', 'locals()'],
+ ​​'Out': {},
+ '_': '',
+ '__': '',
+ '___': '',
+ '__builtin__':,
+ ' __builtins__':,
+ '__name__': '__main__',
+ '_dh': ['/home/repl'],
+ '_i': '',
+ '_i1': 'locals()',
+ '_ih': ['', 'locals()'],
+ ​​'_ii': '',
+ '_iii': '',
+ '_oh': {},
+ '_sh':,
+ 'exit':,
+ 'get_ipython': > ,
+ 'quit': }
+"""
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 1 : Locals Python ───────────────────────────────────────────────────
+
+
+class local:
+    l = 50
+    # locals inside a class
+    print('\nlocals() value inside class\n', locals())
+
+
+# Output :
+# locals() value inside class
+ #{'__module__': '__main__', '__qualname__': 'local', 'l': 50}
+# ────────────────────────────────────────────────────────────────────────────────
+"""
+Kompiler Python memelihara tabel simbol yang berisi informasi yang diperlukan tentang program yang sedang ditulis. Ada dua jenis tabel simbol di Python - Lokal dan Global .
+
+Tabel Simbol Lokal menyimpan semua informasi yang terkait dengan cakupan lokal program (di dalam kelas atau metode). Kita dapat mengakses tabel simbol ini dengan locals()metode.
+
+Biasanya, pemrogram python menggunakan locals()metode untuk membatasi variabel dan metode apa pun di dalam lingkup metode atau kelas.
+
+Dalam contoh di atas, kami memiliki kelas bernama local. Di sini, kami telah menggunakan metode locals() untuk mengembalikan variabel dan metode kelas ini.
+"""
+
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 2: Locals Untuk Mengubah Nilai ──────────────────────────────────────
+
+
+def localsPresent():
+    present = True
+    print(present)
+    locals()['present'] = False
+    print(present)
+
+
+localsPresent()
+# Output :
+# Benar
+# Benar
+# ────────────────────────────────────────────────────────────────────────────────
+""" 
+Dalam contoh di atas, kami telah mengubah nilai presentvariabel di dalam fungsi localsPresentmenggunakan locals()metode.
+
+Sejak locals()mengembalikan kamus, kami telah menggunakan metode dengan item kamus yaitu variabel yang ada dan mengubah nilainya menjadi False.
+"""
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# TODO ─── Penggunaan Fungsi Map ──────────────────────────────────────────────────────
+# Fungsi tersebut map()menerapkan fungsi yang diberikan ke setiap item dari iterable (daftar, tuple, dll.) dan mengembalikan sebuah iterator.
+# Syntax : map(function, iterable, ...)
+# Fungsi map()ini mengambil dua parameter:
+#   -function - fungsi yang melakukan beberapa tindakan untuk setiap elemen dari iterable
+#   -iterable - iterable seperti set , list , tuple , dll
+# You can pass more than one iterable to the map() function.
+# Fungsi map()mengembalikan objek kelas peta. Nilai yang dikembalikan dapat diteruskan ke fungsi seperti
+#   -list() - untuk mengonversi ke daftar
+#   -set() - untuk mengonversi ke set, dan seterusnya.
+# #
+
+# ─── Contoh 0 ───────────────────────────────────────────────────────────────────
+from xml.etree.ElementTree import XML
+
+
+numbers = [2, 4, 6, 8, 10]
+
+# returns square of a number
+
+
+def square(number):
+    return number * number
+
+
+# apply square() function to each item of the numbers list
+squared_numbers_iterator = map(square, numbers)
+
+# converting to list
+squared_numbers = list(squared_numbers_iterator)
+print(squared_numbers)
+
+# Output: [4, 16, 36, 64, 100]
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 1 : Cara Kerja Maps ─────────────────────────────────────────────────
+
+
+def calculateSquare(n):
+    return n*n
+
+
+numbers = (1, 2, 3, 4)
+result = map(calculateSquare, numbers)
+print(result)
+
+# converting map object to set
+numbersSquare = set(result)
+print(numbersSquare)
+# Output :
+# <map object at 0x000001B3EC6FBB80 >
+#{16, 1, 4, 9}
+# ?Dalam contoh di atas, setiap item dari tupel dikuadratkan.
+# ────────────────────────────────────────────────────────────────────────────────
+""" 
+Karena map()mengharapkan suatu fungsi untuk diteruskan, fungsi lambda biasanya digunakan saat bekerja dengan map()fungsi.
+Fungsi lambda adalah fungsi pendek tanpa nama. Kunjungi halaman ini untuk mempelajari lebih lanjut tentang Fungsi lambda Python .
+"""
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 2: Bagaimana Cara Menggunakan Fungsi Lamda Dengan Map ───────────────
+numbers = (1, 2, 3, 4)
+result = map(lambda x: x*x, numbers)
+print(result)
+
+# converting map object to set
+numbersSquare = set(result)
+print(numbersSquare)
+# Output :
+# <map object at 0x000001B3EC6FBB80 >
+#{16, 1, 4, 9}
+# ────────────────────────────────────────────────────────────────────────────────
+# ?sama kek contoh 1
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 3: Melewati Beberapa Iterator Ke Map Menggunakan Lambda ─────────────
+num1 = [4, 5, 6]
+num2 = [5, 6, 7]
+
+result = map(lambda n1, n2: n1+n2, num1, num2)
+print(list(result))
+#Output : [9, 11, 13]
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# TODO ─── Penggunaan Fungsi Map ──────────────────────────────────────────────────────
+# Fungsi max()mengembalikan item terbesar dalam iterable. Ini juga dapat digunakan untuk menemukan item terbesar antara dua atau lebih parameter.
+# Syntax : max(iterable, *iterables, key, default)
+#! max()mengembalikan elemen terbesar dari iterable.
+# ────────────────────────────────────────────────────────────────────────────────
+# Fungsi max()memiliki dua bentuk:
+# to find the largest item in an iterable
+#! max(iterable, *iterables, key, default)
+
+# to find the largest item between two or more objects
+#! max(arg1, arg2, *args, key)
+# ────────────────────────────────────────────────────────────────────────────────
+
+# max() with iterable arguments
+# maks() Parameter :
+#   -iterable - sebuah iterable seperti daftar, tuple, set, kamus, dll.
+#   -* iterables(opsional) - sejumlah iterables bisa lebih dari satu
+#   -key(opsional) - fungsi kunci tempat iterable dilewatkan dan perbandingan dilakukan berdasarkan nilai pengembaliannya
+#   -default(opsional) - nilai default jika iterable yang diberikan kosong
+
+
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ? max() dengan argumen yang dapat diubah
+
+#! max bentuk 1 : max(iterable, *iterables, key, default)
+# ─── Contoh 0 ───────────────────────────────────────────────────────────────────
+numbers = [9, 34, 11, -4, 27]
+
+# find the maximum number
+max_number = max(numbers)
+print(max_number)
+
+# Output: 34
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 1: Dapatkan Item Terbesar Dalam Daftar Atau List ────────────────────
+number = [3, 2, 8, 5, 10, 6]
+largest_number = max(number)
+
+print("The largest number is:", largest_number)
+# Output : Bilangan terbesar adalah: 10
+# ────────────────────────────────────────────────────────────────────────────────
+# ?Jika item dalam iterable adalah string, item terbesar (diurutkan berdasarkan abjad) dikembalikan.
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# ─── Contoh 2: String Terbesar Dalam Daftar ─────────────────────────────────────
+languages = ["Python", "C Programming", "Java", "JavaScript"]
+largest_string = max(languages)
+
+print("The largest string is:", largest_string)
+# Output :String terbesar adalah: Python
+# ?Dalam kasus kamus, max()mengembalikan kunci terbesar. Mari kita gunakan keyparameter sehingga kita dapat menemukan kunci kamus yang memiliki nilai terbesar.
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 3: Max Dalam Kamus ──────────────────────────────────────────────────
+square = {2: 4, -3: 9, -1: 1, -2: 4}
+
+# the largest key
+key1 = max(square)
+print("The largest key:", key1)    # 2
+
+# the key whose value is the largest
+key2 = max(square, key=lambda k: square[k])
+
+print("The key with the largest value:", key2)    # -3
+
+# getting the largest value
+print("The largest value:", square[key2])    # 9
+
+# ────────────────────────────────────────────────────────────────────────────────
+
+# kita telah melewatkan fungsi lambda ke keyparameter.
+# key = lambda k: square[k]
+# Fungsi mengembalikan nilai kamus. Berdasarkan nilai(bukan kunci kamus), kunci yang memiliki nilai maksimum dikembalikan.
+""" 
+Catatan:
+Jika kita melewati iterator kosong, ValueErrorpengecualian dimunculkan. Untuk menghindarinya, kita bisa melewatibawaanparameter.
+Jika kita melewati lebih dari satu iterator, item terbesar dari iterator yang diberikan akan dikembalikan.
+"""
+
+# ? max() tanpa iterable
+#! max bentuk ke 2 : max(arg1, arg2, *args, key)
+# Untuk menemukan objek terbesar di antara dua atau lebih parameter, kita dapat menggunakan sintaks ini:
+# Syntax : max(arg1, arg2, *args, key)
+# maks() parameter :
+#   -arg1 - sebuah objek; dapat berupa angka, string, dll.
+#   -arg2 - sebuah objek; dapat berupa angka, string, dll.
+#   -*args (opsional) - sejumlah objek
+#   -key (opsional) - fungsi kunci di mana setiap argumen dilewatkan, dan perbandingan dilakukan berdasarkan nilai kembaliannya
+# Pada dasarnya, max()fungsi menemukan item terbesar di antara dua objek atau lebih.
+# max()mengembalikan argumen terbesar di antara beberapa argumen yang diteruskan ke sana.
+##
+
+# ─── Contoh 4: Temukan Maksimum Di Antara Angka-angka Yang Diberikan ────────────
+# find max among the arguments
+result = max(4, -5, 23, 5)
+print("The maximum number is:", result)
+# Output : Jumlah maksimumnya adalah: 23
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# TODO ─── Penggunaan Fungsi Memory View ──────────────────────────────────────────────
+# Fungsi memoryview() mengembalikan objek tampilan memori dari argumen yang diberikan.
+# Syntax : memoryview(obj)
+# memoryview() Parameter :
+#   -obj - objek yang data internalnya akan diekspos. objharus mendukung protokol buffer ( byte , bytearray )
+# Fungsi memoryview()mengembalikan objek tampilan memori.
+# #
+
+# ?Sebelum kita masuk ke tampilan memori, kita harus terlebih dahulu memahami tentang protokol buffer Python.
+""" 
+Protokol Penyangga Python
+Protokol buffer menyediakan cara untuk mengakses data internal suatu objek. Data internal ini adalah array memori atau buffer.
+Protokol buffer memungkinkan satu objek untuk mengekspos data internal (buffer) dan yang lain untuk mengakses buffer tersebut tanpa penyalinan perantara.
+Protokol ini hanya dapat diakses oleh kami di level C-API dan tidak menggunakan basis kode normal kami.
+Jadi, untuk mengekspos protokol yang sama ke basis kode Python normal, tampilan memori hadir.
+"""
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ? ─── Apa Itu Tampilan Memori ───────────────────────────────────────────────────
+"""
+Tampilan memori adalah cara aman untuk mengekspos protokol buffer dengan Python.
+Ini memungkinkan Anda untuk mengakses buffer internal suatu objek dengan membuat objek tampilan memori.
+"""
+# ────────────────────────────────────────────────────────────────────────────────
+# ?Mengapa protokol buffer dan tampilan memori penting?
+""" 
+Kita perlu ingat bahwa setiap kali kita melakukan beberapa tindakan pada suatu objek (panggil fungsi suatu objek, iris array), Python perlu membuat salinan objek tersebut .
+Jika kita memiliki data besar untuk digunakan (misalnya, data biner dari suatu gambar), kita tidak perlu membuat salinan potongan data yang sangat besar, yang hampir tidak berguna.
+Dengan menggunakan protokol buffer, kita dapat memberikan akses objek lain untuk menggunakan/memodifikasi data besar tanpa menyalinnya. Ini membuat program menggunakan lebih sedikit memori dan meningkatkan kecepatan eksekusi.
+"""
+# ────────────────────────────────────────────────────────────────────────────────
+
+# Syntax : memoryview(obj)
+
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# ─── Contoh 1: Bagaimana Memoryview Bekerja Dengan Python ───────────────────────
+# random bytearray
+random_byte_array = bytearray('ABC', 'utf-8')
+
+mv = memoryview(random_byte_array)
+
+# access memory view's zeroth index
+print(mv[0])  # Output :65
+
+# create byte from memory view
+print(bytes(mv[0:2]))  # Output :b'AB'
+
+# create list from memory view
+print(list(mv[0:3]))  # Output :[65, 66, 67]
+# ────────────────────────────────────────────────────────────────────────────────
+""" 
+Di sini, kami membuat objek tampilan memorimvdari array byterandom_byte_array.
+Kemudian, kami mengaksesmv's 0th index, 'A', dan mencetaknya (yang memberikan nilai ASCII - 65).
+Sekali lagi, kami mengaksesmvdari 0 dan 1, 'AB', dan mengubahnya menjadi byte.
+Akhirnya, kami mengakses semua indeksmvdan mengubahnya menjadi daftar. Karena secara internal bytearraymenyimpan nilai ASCII untuk alfabet, outputnya adalah daftar nilai ASCII dariSEBUAH,B,danC.
+"""
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 2: Ubah Data Internal Menggunakan Tampilan Memori ───────────────────
+# random bytearray
+random_byte_array = bytearray('ABC', 'utf-8')
+print('Before updation:', random_byte_array)
+# Output : Sebelum pembaruan: bytearray(b'ABC')
+
+mv = memoryview(random_byte_array)
+
+# update 1st index of mv to Z
+mv[1] = 90
+print('After updation:', random_byte_array)
+# Output :Setelah pembaruan: bytearray(b'AZC')
+# ────────────────────────────────────────────────────────────────────────────────
+""" 
+Di sini, kami memperbarui indeks pertama tampilan memori menjadi 90, nilai ASCII dari Z.
+Karena, objek tampilan memorimvreferensi buffer/memori yang sama, memperbarui indeks dimvjuga updaterandom_byte_array.
+"""
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# TODO ─── Penggunaan Fungsi Min ──────────────────────────────────────────────────────
+# Fungsi min()mengembalikan item terkecil dalam iterable. Ini juga dapat digunakan untuk menemukan item terkecil di antara dua atau lebih parameter.
+# Syntax :
+# #
+
+# ────────────────────────────────────────────────────────────────────────────────
+#!Fungsi min()memiliki dua bentuk:
+# ? to find the smallest item in an iterable
+# min(iterable, *iterables, key, default)
+# ?to find the smallest item between two or more objects
+# min(arg1, arg2, *args, key)
+# ────────────────────────────────────────────────────────────────────────────────
+
+#?1. min() dengan argumen yang dapat diubah
+# Syntax : min(iterable, *iterables, key, default)
+#min() Parameter : 
+#   -iterable - sebuah iterable seperti daftar, tuple, set, kamus, dll.
+#   -* iterables (opsional) - sejumlah iterables; bisa lebih dari satu
+#   -key (opsional) - fungsi kunci tempat iterable dilewatkan dan perbandingan dilakukan berdasarkan nilai pengembaliannya
+#   -default (opsional) - nilai default jika iterable yang diberikan kosong
+# min()mengembalikan elemen terkecil dari iterable.
+# #
+
+# ─── Contoh - 0 ─────────────────────────────────────────────────────────────────
+numbers = [9, 34, 11, -4, 27]
+
+# find the smallest number
+min_number = min(numbers)
+print(min_number)
+
+# Output: -4
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 1.1 ─────────────────────────────────────────────────────────────────
+number = [3, 2, 8, 5, 10, 6]
+smallest_number = min(number)
+
+print("The smallest number is:", smallest_number)
+#Output : Bilangan terkecil adalah: 2
+# ────────────────────────────────────────────────────────────────────────────────
+
+#?Jika item dalam iterable adalah string, item terkecil (diurutkan berdasarkan abjad) dikembalikan.
+# ─── Contoh 1.2 Min Dengan String ───────────────────────────────────────────────
+languages = ["Python", "C Programming", "Java", "JavaScript"]
+smallest_string = min(languages)
+
+print("The smallest string is:", smallest_string)
+#Output : String terkecil adalah: Pemrograman C
+# ────────────────────────────────────────────────────────────────────────────────
+
+#?Dalam kasus kamus, min()mengembalikan kunci terkecil. Mari kita gunakan keyparameter sehingga kita dapat menemukan kunci kamus yang memiliki nilai terkecil.
+# ─── Contoh 1.3 Min Dalam Kamus ─────────────────────────────────────────────────
+square = {2: 4, 3: 9, -1: 1, -2: 4}
+
+# the smallest key
+key1 = min(square)
+print("The smallest key:", key1)    # -2
+
+# the key whose value is the smallest
+key2 = min(square, key=lambda k: square[k])
+
+print("The key with the smallest value:", key2)    # -1
+
+# getting the smallest value
+print("The smallest value:", square[key2])    # 1
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ────────────────────────────────────────────────────────────────────────────────
+#!Pada min()fungsi kedua, kita telah melewatkan fungsi lambda ke keyparameter.
+# key = lambda k: square[k]
+#Fungsi mengembalikan nilai kamus. Berdasarkan nilai (bukan kunci kamus), kunci yang memiliki nilai minimum dihitung.
+""" 
+Beberapa Catatan:
+
+Jika kita melewati iterator kosong, ValueErrorpengecualian dimunculkan. Untuk menghindarinya, kita bisa melewatibawaanparameter.
+Jika kita melewati lebih dari satu iterator, item terkecil dari iterator yang diberikan akan dikembalikan.
+"""
+# ────────────────────────────────────────────────────────────────────────────────
+
+#! min tanpa iterable
+#Syntax : min(arg1, arg2, *args, key)
+# min() Parameter :
+#   -arg1 - sebuah objek; dapat berupa angka, string, dll.
+#   -arg2 - sebuah objek; dapat berupa angka, string, dll.
+#   -*args (opsional) - sejumlah objek
+#   -key (opsional) - fungsi kunci di mana setiap argumen dilewatkan, dan perbandingan dilakukan berdasarkan nilai kembaliannya
+# Pada dasarnya, min()fungsi dapat menemukan item terkecil di antara dua objek atau lebih.
+# min()mengembalikan argumen terkecil di antara beberapa argumen yang diteruskan ke sana.
+# #
+
+# ─── Contoh 4: Temukan Minimum Di Antara Angka-angka Yang Diberikan ─────────────
+result = min(4, -5, 23, 5)
+print("The minimum number is:", result)
+# ouput : Jumlah minimumnya adalah -5
+# ────────────────────────────────────────────────────────────────────────────────
+
+# TODO ─── Penggunaan Fungsi Next ─────────────────────────────────────────────────────
+# Itu next() mengembalikan item berikutnya dari iterator.
+# Syntax : next(iterator, default)
+# next() Parameter
+#   -iteratornext()iterator
+#   -default (optional) - this value is returned if the iterator is exhausted (there is no next item)
+# next() Return Value
+#   -Fungsi next()mengembalikan item berikutnya dari iterator.
+#   -Jika iterator habis, ia mengembalikan defaultnilai yang diteruskan sebagai argumen.
+#   -If the default parameter is omitted and the iterator is exhausted, it raises the StopIteration exception.
+# #
+
+# ─── Contoh 0 ───────────────────────────────────────────────────────────────────
+marks = [65, 71, 68, 74, 61]
+
+# convert list to iterator
+iterator_marks = iter(marks)
+
+# the next element is the first element
+marks_1 = next(iterator_marks)
+print(marks_1)
+
+# find the next element which is the second element
+marks_2 = next(iterator_marks)
+print(marks_2)
+
+# Output: 65
+#         71
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 1: Dapatkan Item Berikutnya ─────────────────────────────────────────
+random = [5, 9, 'cat']
+
+# converting the list to an iterator
+random_iterator = iter(random)
+print(random_iterator)
+
+# Output: 5
+print(next(random_iterator))
+
+# Output: 9
+print(next(random_iterator))
+
+# Output: 'cat'
+print(next(random_iterator))
+
+# This will raise Error
+# iterator is exhausted
+print(next(random_iterator))
+"""
+Output : 
+<list_iterator objek di 0x7feb49032b00> 
+5 
+9 
+cat 
+Traceback (panggilan terakhir terakhir): 
+  File "python", baris 18, di <module> 
+StopIteration
+"""
+# ────────────────────────────────────────────────────────────────────────────────
+""" 
+Daftar adalah iterable dan Anda bisa mendapatkan iteratornya darinya dengan menggunakan iter()fungsi di Python.
+Kami mendapatkan kesalahan dari pernyataan terakhir dalam program di atas karena kami mencoba untuk mendapatkan item berikutnya ketika tidak ada item berikutnya yang tersedia (iterator habis).
+Dalam kasus seperti itu, Anda dapat memberikanbawaannilai sebagai parameter kedua.
+"""
+# ────────────────────────────────────────────────────────────────────────────────
+
+# ─── Contoh 2: Melewati Nilai Default Ke Next ───────────────────────────────────
+random = [5, 9]
+
+# converting the list to an iterator
+random_iterator = iter(random)
+
+# Output: 5
+print(next(random_iterator, '-1'))
+
+# Output: 9
+print(next(random_iterator, '-1'))
+
+# random_iterator is exhausted
+# Output: '-1'
+print(next(random_iterator, '-1'))
+print(next(random_iterator, '-1'))
+print(next(random_iterator, '-1'))
+
+# ────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────
+
