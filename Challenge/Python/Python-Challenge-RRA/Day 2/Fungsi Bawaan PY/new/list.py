@@ -48,6 +48,9 @@ print(list(vowel_set))  # Output : ['a', 'o', 'u', 'e', 'i']
 # vowel dictionary
 vowel_dictionary = {'a': 1, 'e': 2, 'i': 3, 'o': 4, 'u': 5}
 print(list(vowel_dictionary))  # Output :['o', 'e', 'a', 'u', 'i']
+
+#!Catatan: Dalam kasus kamus, kunci kamus akan menjadi item dari daftar. Juga, urutan elemen akan acak.
+
 # ────────────────────────────────────────────────────────────────────────────────
 
 # ─── Contoh 3: Buat Daftar Dari Objek Iterator ──────────────────────────────────
